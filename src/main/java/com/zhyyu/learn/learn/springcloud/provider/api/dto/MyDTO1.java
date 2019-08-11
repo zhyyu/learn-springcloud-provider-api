@@ -17,5 +17,6 @@ public class MyDTO1 {
 
     private String key1;
     private String key2;
+    private String sign;
 
 }
