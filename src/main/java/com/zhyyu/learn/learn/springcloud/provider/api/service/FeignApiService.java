@@ -1,5 +1,6 @@
 package com.zhyyu.learn.learn.springcloud.provider.api.service;
 
+import com.zhyyu.learn.learn.springcloud.provider.api.config.FormFeignConfig;
 import com.zhyyu.learn.learn.springcloud.provider.api.dto.MyDTO1;
 import feign.Request;
 import feign.RequestInterceptor;
@@ -29,13 +30,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author juror
  * @datatime 2019/7/23 0:08
  */
-@FeignClient(name = "cloud-provider1", path = "/provider", configuration = FeignApiService.Configuration.class)
+@FeignClient(name = "cloud-provider1", path = "/provider", configuration = FormFeignConfig.class)
+//@FeignClient(name = "cloud-provider1", path = "/provider", configuration = FeignApiService.Configuration.class)
 //@FeignClient(name = "cloud-provider1", path = "/provider")
 public interface FeignApiService {
 
     @RequestMapping(value = "helloFromFeignApi", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     String helloFromFeignApi(MyDTO1 myDTO1);
 
+
+    /* =========================== 抽取至 com.zhyyu.learn.learn.springcloud.provider.api.config.FormFeignConfig =========================== */
     /**
      * <pre>
      *     https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html
@@ -50,13 +54,13 @@ public interface FeignApiService {
      * </pre>
      */
 //    @Configuration
-    class Configuration {
+    /*class Configuration {
         @Bean
         Encoder feignFormEncoder(ObjectFactory<HttpMessageConverters> converters) {
             return new SpringFormEncoder(new SpringEncoder(converters));
         }
 
-        /**
+        *//**
          * 测试使用拦截器添加请求表单参数
          * <pre>
          *     1. 使用 body
@@ -65,32 +69,32 @@ public interface FeignApiService {
          *     2. 使用 template.query
          *          - 添加为url? 参数, 如 POST /helloFromFeignApi?sign=mysign HTTP/1.1
          * </pre>
-         */
+         *//*
         @Bean
         RequestInterceptor testRequestInterceptor() {
             return new RequestInterceptor() {
                 @Override
                 public void apply(RequestTemplate template) {
-                    /**
+                    *//**
                      * POST /helloFromFeignApi HTTP/1.1
                      * Content-Length: 23
                      * Content-Type: application/x-www-form-urlencoded; charset=UTF-8
                      *
                      * key1=value1&key2=value2
-                     */
+                     *//*
                     System.out.println(template.request());
 
                     Request.Body body = template.requestBody();
-                    /**
+                    *//**
                      * key1=value1&key2=value2
-                     */
+                     *//*
                     System.out.println(body.asString());
                     String newBodyStr = body.asString() + "&sign=mysign2";
                     template.body(newBodyStr);
                     System.out.println(template.request());
 
                     // 为增加到url 后, POST /provider/helloFromFeignApi?sign=mysign HTTP/1.1
-                    /**
+                    *//**
                      * POST /helloFromFeignApi?sign=mysign HTTP/1.1
                      * Content-Length: 36
                      * Content-Type: application/x-www-form-urlencoded; charset=UTF-8
@@ -98,7 +102,7 @@ public interface FeignApiService {
                      * key1=value1&key2=value2&sign=mysign2
                      *
                      * body 和 url 中参数可以合并解析到provider dto1 中(当body key1=value1&key2=value2)
-                     */
+                     *//*
                     String sign = "mysign";
                     template.query("sign", sign);
                     System.out.println(template.request());
@@ -106,7 +110,7 @@ public interface FeignApiService {
             };
         }
 
-    }
+    }*/
 
 
 
