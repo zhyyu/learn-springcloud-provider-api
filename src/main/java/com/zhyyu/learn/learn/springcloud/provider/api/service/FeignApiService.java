@@ -40,77 +40,35 @@ public interface FeignApiService {
 
 
     /* =========================== 抽取至 com.zhyyu.learn.learn.springcloud.provider.api.config.FormFeignConfig =========================== */
-    /**
-     * <pre>
-     *     https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html
-     *
-     *     FooConfiguration does not need to be annotated with @Configuration.
-     *     However, if it is, then take care to exclude it from any @ComponentScan that would otherwise include this configuration as it will become the default source for feign.Decoder,
-     *     feign.Encoder, feign.Contract, etc., when specified. This can be avoided by putting it in a separate, non-overlapping package from any @ComponentScan or @SpringBootApplication,
-     *     or it can be explicitly excluded in @ComponentScan.
-     *
-     *     如果设置 @Configuration 则对所有feign 生效(线上不可, 可能仅想差异外某一feign), 待验证存在 @Configuration 情况; todo
-     *     如无 @Configuration, 配置依然生效, 但是否对其他feign 生效待验证 todo
-     * </pre>
-     */
-//    @Configuration
-    /*class Configuration {
+    class Configuration {
         @Bean
         Encoder feignFormEncoder(ObjectFactory<HttpMessageConverters> converters) {
             return new SpringFormEncoder(new SpringEncoder(converters));
         }
 
-        *//**
-         * 测试使用拦截器添加请求表单参数
-         * <pre>
-         *     1. 使用 body
-         *          - 手动修改body, 如添加 "&sign=mysign2" 尾缀
-         *          - 该参数方法优先级高于 query, 如query sign=mysign 则被body 覆盖
-         *     2. 使用 template.query
-         *          - 添加为url? 参数, 如 POST /helloFromFeignApi?sign=mysign HTTP/1.1
-         * </pre>
-         *//*
         @Bean
         RequestInterceptor testRequestInterceptor() {
             return new RequestInterceptor() {
                 @Override
                 public void apply(RequestTemplate template) {
-                    *//**
-                     * POST /helloFromFeignApi HTTP/1.1
-                     * Content-Length: 23
-                     * Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-                     *
-                     * key1=value1&key2=value2
-                     *//*
+
                     System.out.println(template.request());
 
                     Request.Body body = template.requestBody();
-                    *//**
-                     * key1=value1&key2=value2
-                     *//*
+
                     System.out.println(body.asString());
                     String newBodyStr = body.asString() + "&sign=mysign2";
                     template.body(newBodyStr);
                     System.out.println(template.request());
 
-                    // 为增加到url 后, POST /provider/helloFromFeignApi?sign=mysign HTTP/1.1
-                    *//**
-                     * POST /helloFromFeignApi?sign=mysign HTTP/1.1
-                     * Content-Length: 36
-                     * Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-                     *
-                     * key1=value1&key2=value2&sign=mysign2
-                     *
-                     * body 和 url 中参数可以合并解析到provider dto1 中(当body key1=value1&key2=value2)
-                     *//*
-                    String sign = "mysign";
+                    String sign = "mysignxxx";
                     template.query("sign", sign);
                     System.out.println(template.request());
                 }
             };
         }
 
-    }*/
+    }
 
 
 
