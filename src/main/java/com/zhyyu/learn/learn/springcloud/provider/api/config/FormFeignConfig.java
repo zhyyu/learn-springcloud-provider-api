@@ -3,6 +3,7 @@ package com.zhyyu.learn.learn.springcloud.provider.api.config;
 import feign.Request;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import feign.Retryer;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.beans.factory.ObjectFactory;
@@ -27,6 +28,27 @@ import org.springframework.context.annotation.Bean;
  */
 //@Configuration
 public class FormFeignConfig {
+
+    /**
+     * 测试 feignRetryer
+     * <pre>
+     *     1. 默认为 org.springframework.cloud.openfeign.FeignClientsConfiguration#feignRetryer() 中 Retryer.NEVER_RETRY 不重试策略
+     *     2. 若自己配置retryer, 如 Retryer.Default(), 可重试
+     *     3. 注意重试后 RequestInterceptor 增加变量会增加多次; 如
+     *
+     *     请求首行:
+     *     POST /provider/helloFromFeignApi?sign=mysign&sign=mysign&sign=mysign&sign=mysign&sign=mysign HTTP/1.1
+     *     ...
+     *
+     *     body 如下:
+     *     key1=value1&key2=value2&sign=mysign2&sign=mysign2&sign=mysign2&sign=mysign2&sign=mysign2
+     *
+     * </pre>
+     */
+    /*@Bean
+    Retryer myFeignRetryer() {
+        return new Retryer.Default();
+    }*/
 
     @Bean
     Encoder feignFormEncoder(ObjectFactory<HttpMessageConverters> converters) {
