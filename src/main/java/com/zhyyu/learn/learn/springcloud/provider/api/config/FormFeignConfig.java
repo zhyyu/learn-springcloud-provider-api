@@ -35,6 +35,7 @@ public class FormFeignConfig {
      *     1. 默认为 org.springframework.cloud.openfeign.FeignClientsConfiguration#feignRetryer() 中 Retryer.NEVER_RETRY 不重试策略
      *     2. 若自己配置retryer, 如 Retryer.Default(), 可重试
      *     3. 注意重试后 RequestInterceptor 增加变量会增加多次; 如
+     *     4. 重试会选择其他机器(策略tbd)
      *
      *     请求首行:
      *     POST /provider/helloFromFeignApi?sign=mysign&sign=mysign&sign=mysign&sign=mysign&sign=mysign HTTP/1.1
