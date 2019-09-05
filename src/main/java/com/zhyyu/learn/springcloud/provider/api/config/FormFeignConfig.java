@@ -1,4 +1,4 @@
-package com.zhyyu.learn.learn.springcloud.provider.api.config;
+package com.zhyyu.learn.springcloud.provider.api.config;
 
 import feign.Request;
 import feign.RequestInterceptor;

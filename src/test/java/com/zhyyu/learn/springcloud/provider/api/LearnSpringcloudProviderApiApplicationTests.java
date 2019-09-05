@@ -1,4 +1,4 @@
-package com.zhyyu.learn.learn.springcloud.provider.api;
+package com.zhyyu.learn.springcloud.provider.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

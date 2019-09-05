@@ -1,7 +1,7 @@
-package com.zhyyu.learn.learn.springcloud.provider.api.service;
+package com.zhyyu.learn.springcloud.provider.api.service;
 
-import com.zhyyu.learn.learn.springcloud.provider.api.config.FormFeignConfig;
-import com.zhyyu.learn.learn.springcloud.provider.api.dto.MyDTO1;
+import com.zhyyu.learn.springcloud.provider.api.config.FormFeignConfig;
+import com.zhyyu.learn.springcloud.provider.api.dto.MyDTO1;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

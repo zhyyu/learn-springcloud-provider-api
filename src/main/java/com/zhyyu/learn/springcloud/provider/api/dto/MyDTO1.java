@@ -1,4 +1,4 @@
-package com.zhyyu.learn.learn.springcloud.provider.api.dto;
+package com.zhyyu.learn.springcloud.provider.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
